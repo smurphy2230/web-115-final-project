@@ -34,4 +34,12 @@ function courseElement() {
     return courseElem;
 }
 
+function validateEmail() {
+    var regEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (regEx.test(document.getElementById("email").value) != true) {
+        alert("Email address is not valid")
+    }
+}
+
 main()
+document.getElementById("validateEmail").addEventListener("click", validateEmail)
