@@ -9,6 +9,7 @@
 <body>
     <hr>
     <h1 id="heading">Build Your Resume</h1>
+    <form action="" name="resumeForm">
     <div id="contactInfo">
         <p>
             <label for="name">Full Name: </label>
@@ -39,18 +40,59 @@
     <hr>
     <div id="personalData">
         <p>
-            <label for="personalData">Enter Your Personal Information: </label>
+            <label for="personalData">Enter Your Personal Information: </label><br>
             <textarea name="personalData" id="personalDate" cols="75" rows="5"></textarea>
         </p>
         <p>
-            <label for="careerObj">Enter Your Career Objective: </label>
+            <label for="careerObj">Enter Your Career Objective: </label><br>
             <textarea name="careerObj" id="careerObj" cols="75" rows="5"></textarea>
         </p>
         <p>
-            <label for="eduBackground">Enter Your Educational Background: </label>
+            <label for="eduBackground">Enter Your Educational Background: </label><br>
             <textarea name="personalData" id="personalDate" cols="75" rows="5"></textarea>
         </p>
     </div>
+    <div id="previousEmp">
+        <p>Enter current or most recent employer details: <br>
+            <label for="startDate">Start Date: </label>
+            <input type="date" name="startDate" id="startDate">
+            <label for="endDate">End Date: </label>
+            <input type="date" name="endDate" id="endDate"><br>
+            <textarea name="prevEmp1" id="prevEmp1" cols="75" rows="5"></textarea>
+        </p>
+        <p>Enter prior employer details: <br>
+            <label for="startDate">Start Date: </label>
+            <input type="date" name="startDate" id="startDate">
+            <label for="endDate">End Date: </label>
+            <input type="date" name="endDate" id="endDate"><br>
+            <textarea name="prevEmp2" id="prevEmp2" cols="75" rows="5"></textarea>
+        </p>
+        <p>Enter prior employer details: <br>
+            <label for="startDate">Start Date: </label>
+            <input type="date" name="startDate" id="startDate">
+            <label for="endDate">End Date: </label>
+            <input type="date" name="endDate" id="endDate"><br>
+            <textarea name="prevEmp3" id="prevEmp3" cols="75" rows="5"></textarea>
+        </p>
+        <p>Enter prior employer details: <br>
+            <label for="startDate">Start Date: </label>
+            <input type="date" name="startDate" id="startDate">
+            <label for="endDate">End Date: </label>
+            <input type="date" name="endDate" id="endDate"><br>
+            <textarea name="prevEmp4" id="prevEmp4" cols="75" rows="5"></textarea>
+        </p>
+    </div>
+    <div id="references">
+        <label for="businessRef">Enter Business References: </label><br>
+        <textarea name="businessRef" id="businessRef" cols="75" rows="5"></textarea>
+    </div>
+    <p>
+        <input type="button" value="Create Resume" id="createResume">
+    </p>
+
+    </form>
+
+    
     
 
         
