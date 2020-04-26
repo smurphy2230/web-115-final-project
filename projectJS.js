@@ -35,9 +35,14 @@ function courseElement() {
 }
 
 function validateEmail() {
-    var regEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    const regEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     if (regEx.test(document.getElementById("email").value) != true) {
-        alert("Email address is not valid")
+        valid = false;
+        alert("Email address is not valid");
+        return false;
+    } else {
+        valid = true;
+        return true;
     }
 }
 
