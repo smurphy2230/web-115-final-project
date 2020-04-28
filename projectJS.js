@@ -122,7 +122,7 @@ function writeNewHeader(newResume) {
     let city = inputForm.city.value;
     let state = inputForm.state.value;
     let zipCode = inputForm.zipCode.value;
-    newResume.write("<p>" + city + " , " + state.toUpperCase() + " " + zipCode + "</p>");
+    newResume.write("<p>" + city + ", " + state.toUpperCase() + " " + zipCode + "</p>");
 
     let phone = inputForm.phone.value;
     newResume.write("<p>" + phone + "</p>");
