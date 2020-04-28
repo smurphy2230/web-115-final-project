@@ -3,6 +3,10 @@ function main() {
     const body = document.body;
     body.insertBefore(nameElement(), body.childNodes[0]);
     body.insertBefore(courseElement(), body.childNodes[1]);
+
+    // Add event handler to input form submit button
+    const inputForm = document.getElementById("resumeForm");
+    inputForm.createResume.addEventListener("click", createNewResume);
 }
 
 function nameElement() {
@@ -36,15 +40,95 @@ function courseElement() {
 
 function validateEmail() {
     const regEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (regEx.test(document.getElementById("email").value) != true) {
-        valid = false;
+    if (regEx.test(document.getElementById("email").value) == true) {
+        //console.log("valid email");
+        return true;
+    } else {
         alert("Email address is not valid");
         return false;
-    } else {
-        valid = true;
-        return true;
+        
     }
 }
 
+// new web page based on user input, "on the fly"
+function createNewResume() {
+
+    if (!validateEmail()) {
+        alert("Email address is not valid");
+        return;
+    }
+
+    const newResume = createNewPage(600, 900).document;
+
+    newResume.write("<html>");
+    newResume.write("<head>");
+
+    writeNewStyle(newResume);
+
+    newResume.write("</head>");
+    newResume.write("<body");
+
+    writeNewHeader(newResume);
+    // writeNewBody(newResume);
+
+    newResume.write("</body");
+    newResume.write("/html");
+}
+
+// create new web page
+function createNewPage(height, width) {
+    let size = "height" + height + ", width=" + width;
+    return window.open("", "", size);
+}
+
+// new resume style to the document header
+function writeNewStyle(newResume) {
+    const fontSize = 12;
+    const fontFamily = "Courier, Monaco, monospace";
+    const leftMargin = 20;
+    const bottomMargin = "10px";
+
+    let styleString = "<style>";
+    styleString += "body { ";
+    styleString += ("font-size:" + fontSize + "pt;")
+    styleString += ("font-family:" + fontFamily + ";")
+    styleString += " } ";
+    styleString += "#left { ";
+    styleString += ("float: left; width: " + (leftMargin - 2) + "%");
+    styleString += ("margin-bottom:" + bottomMargin + ";");
+    styleString += " } ";
+    styleString += "#right { ";
+    styleString += ("margin-left:" + leftMargin + "%");
+    styleString += ("margin-bottom:" + bottomMargin + ";");
+    styleString += " } ";
+    styleString += ".clear {";
+    styleString += "clear: both;";
+    styleString += " } ";
+    styleString += "</style>";
+
+    newResume.write(styleString);
+}
+
+// Write users contact info
+function writeNewHeader(newResume) {
+    const inputForm = document.getElementById("resumeForm");
+
+    let name = inputForm.name.value;
+    newResume.write("<h4>" + name.toUpperCase() + "</h4>");
+
+    let address = inputForm.streetAddress.value;
+    newResume.write("<p>" + address + "</p>");
+
+    let city = inputForm.city.value;
+    let state = inputForm.state.value;
+    let zipCode = inputForm.zipCode.value;
+    newResume.write("<p>" + city + " , " + state.toUpperCase() + " " + zipCode + "</p>");
+
+    let phone = inputForm.phone.value;
+    newResume.write("<p>" + phone + "</p>");
+
+    let email = inputForm.email.value;
+    newResume.write("<p>" + email + "</p>");
+}
+
 main()
-document.getElementById("validateEmail").addEventListener("click", validateEmail)
