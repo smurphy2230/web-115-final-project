@@ -68,8 +68,8 @@ function createNewResume() {
     newResume.write("</head>");
     newResume.write("<body");
 
-    writeNewHeader(newResume);
-    // writeNewBody(newResume);
+    writeNewPersonalData(newResume);
+    writeNewBody(newResume);
 
     newResume.write("</body");
     newResume.write("/html");
@@ -85,8 +85,8 @@ function createNewPage(height, width) {
 function writeNewStyle(newResume) {
     const fontSize = 12;
     const fontFamily = "Courier, Monaco, monospace";
-    const leftMargin = 20;
-    const bottomMargin = "10px";
+    // const leftMargin = 20;
+    const paddingBottom = "10px";
 
     let styleString = "<style>";
     styleString += "body { ";
@@ -94,12 +94,13 @@ function writeNewStyle(newResume) {
     styleString += ("font-family:" + fontFamily + ";")
     styleString += " } ";
     styleString += "#left { ";
-    styleString += ("float: left; width: " + (leftMargin - 2) + "%");
-    styleString += ("margin-bottom:" + bottomMargin + ";");
+    styleString += ("float: left; width: 15%");
+    // styleString += (" margin-bottom:" + bottomMargin + ";");
     styleString += " } ";
     styleString += "#right { ";
-    styleString += ("margin-left:" + leftMargin + "%");
-    styleString += ("margin-bottom:" + bottomMargin + ";");
+    styleString += ("float: right; width: 30%")
+    // styleString += (" margin-left:" + leftMargin + "%");
+    styleString += (" padding-bottom:" + paddingBottom + ";");
     styleString += " } ";
     styleString += ".clear {";
     styleString += "clear: both;";
@@ -109,8 +110,8 @@ function writeNewStyle(newResume) {
     newResume.write(styleString);
 }
 
-// Write users contact info
-function writeNewHeader(newResume) {
+// Write new resume user contact info
+function writeNewPersonalData(newResume) {
     const inputForm = document.getElementById("resumeForm");
 
     let name = inputForm.name.value;
@@ -129,6 +130,73 @@ function writeNewHeader(newResume) {
 
     let email = inputForm.email.value;
     newResume.write("<p>" + email + "</p>");
+}
+
+function writeNewBody(newResume) {
+    const inputForm = document.getElementById("resumeForm");
+
+    writeBodySection(newResume, "<b>Career Objectives</b>", formatTextarea(inputForm.careerObj.value));
+    writeBodySection(newResume, "<b>Personal Information</b>", formatTextarea(inputForm.personalInfo.value));
+    writeBodySection(newResume, "<b>Education</b>", formatTextarea(inputForm.educationData.value));
+    writeBodySection(newResume, "<b>Previous Experience</b>", "");
+    writeNewEmpSection(newResume);
+    writeBodySection(newResume, "<b>Background References</b>", formatTextarea(inputForm.businessRef.value));
+    
+}
+
+function writeNewEmpSection(newResume) {
+
+    let prevEmp = document.getElementsByName("prevEmp");
+    let startDates = document.getElementsByName("startDate");
+    let endDates = document.getElementsByName("endDate");
+
+    for (let index = 0; index < prevEmp.length; index++) {
+
+        if (startDates[index].value) {
+
+            let dateString = getDateString(startDates[index].value, endDates[index].value);
+            writeBodySection(newResume, dateString, formatTextarea(prevEmp[index].value))
+        }
+    }
+}
+
+function writeBodySection(newResume, left, right) {
+
+    newResume.write("<div id=\"left\">" + left + "</div>");
+    newResume.write("<div id=\"right\">" + right + "</div>");
+    newResume.write("<div class=\"clear\"></div>");
+}
+
+function formatTextarea(value) {
+
+    let lines = value.split("\n");
+    let string = "";
+    for (var index = 0; index < lines.length; index++) {
+
+        string += lines[index] + "<br>"
+
+    }
+    return string;
+}
+
+function getDateString(start, end) {
+
+    let startMonth = start.charAt(5) + start.charAt(6);
+    let startYear = start.substr(0, 4);
+    let dateString = getMonthString(startMonth) + " " + startYear + " - ";
+
+    if (end) {
+        let endMonth = end.charAt(5) + end.charAt(6);
+        let endYear = end.substr(0, 4);
+        dateString += getMonthString(endMonth) + " " + endYear;
+    }
+    return dateString;
+}
+
+function getMonthString(month) {
+    let months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
+
+    return months[parseInt(month) - 1];
 }
 
 main()
