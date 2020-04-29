@@ -188,7 +188,6 @@ function formatTextarea(value) {
     for (var index = 0; index < lines.length; index++) {
 
         string += lines[index] + "<br>"
-
     }
     return string;
 }
