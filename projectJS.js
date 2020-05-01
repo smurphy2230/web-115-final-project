@@ -187,7 +187,7 @@ function formatTextarea(value) {
     let string = "";
     for (var index = 0; index < lines.length; index++) {
 
-        string += lines[index] + "<br>"
+        string += lines[index] + "<br>";
     }
     return string;
 }
@@ -208,7 +208,7 @@ function getDateString(start, end) {
 }
 
 function getMonthString(month) {
-    let months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
+    const months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.", "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."];
 
     return months[parseInt(month) - 1];
 }
